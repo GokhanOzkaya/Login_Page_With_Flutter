@@ -28,7 +28,27 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
+  bool isKeyboardVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+  @override
+  void didChangeMetrics() {
+    final bottomInset = WidgetsBinding.instance.window.viewInsets.bottom;
+    setState(() {
+      isKeyboardVisible = bottomInset > 0;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,21 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 20,),
-                    Row(
-                      children: [
-                        SizedBox(width: 20,),
-                        Expanded(child: Divider(height: 12,)),
-                        SizedBox(width: 20,),
-                        Text('Or',style: TextStyle(fontSize: 18),),
-                        SizedBox(width: 20,),
-                        Expanded(child: Divider(height: 12,)),
-                        SizedBox(width: 20,),
-                      ],
-                    ),
+                    if(!isKeyboardVisible)buildLoginAppleGoogle(),
 
-
-                    buildLoginAppleGoogle(),
                   ],
                 ),
               ),

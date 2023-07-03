@@ -6,11 +6,10 @@ Padding buildLoginForm() {
     child: Column(children: [
       Row(
         children: [
-          Icon(Icons.mail_outline),
-          SizedBox(width: 10.0), // add some spacing between the icon and the text field
           Expanded(
             child: TextFormField(
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.mail_outline),
                 hintText: 'Mail',
                 filled: true,
                 fillColor: Colors.white10,
@@ -27,25 +26,33 @@ Padding buildLoginForm() {
           ),
         ],
       ),
+
       SizedBox(
         height: 10,
       ),
-      TextFormField(
-        decoration: InputDecoration(
-          hintText: 'Password',
-          icon: Icon(Icons.password),
-          filled: true,
-          fillColor: Colors.white10,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
-            borderSide: BorderSide(color: Colors.greenAccent), // add a border color
+      Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.mail_outline),
+                hintText: 'Password',
+                filled: true,
+                fillColor: Colors.white10,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: BorderSide(color: Colors.greenAccent), // add a border color
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: BorderSide(color: Colors.blue), // add a border color
+                ),
+              ),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
-            borderSide: BorderSide(color: Colors.blue), // add a border color
-          ),
-        ),
+        ],
       ),
+
       SizedBox(
         height: 10,
       ),
@@ -70,6 +77,18 @@ Expanded buildLoginAppleGoogle() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+
+        Row(
+          children: [
+            SizedBox(width: 20,),
+            Expanded(child: Divider(height: 12,)),
+            SizedBox(width: 20,),
+            Text('Or',style: TextStyle(fontSize: 18),),
+            SizedBox(width: 20,),
+            Expanded(child: Divider(height: 12,)),
+            SizedBox(width: 20,),
+          ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:loginpageex/constains/constains.dart';
+import 'package:loginpageex/utils/LoginPage/RegisterPageView.dart';
 
-Padding buildLoginForm() {
+Padding buildLoginForm(BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
+    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
     child: Column(children: [
       Row(
         children: [
@@ -15,18 +17,19 @@ Padding buildLoginForm() {
                 fillColor: Colors.white10,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
-                  borderSide: BorderSide(color: Colors.greenAccent), // add a border color
+                  borderSide: BorderSide(
+                      color: Colors.pinkAccent), // add a border color
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
-                  borderSide: BorderSide(color: Colors.blue), // add a border color
+                  borderSide:
+                      BorderSide(color: Colors.blue), // add a border color
                 ),
               ),
             ),
           ),
         ],
       ),
-
       SizedBox(
         height: 10,
       ),
@@ -41,18 +44,19 @@ Padding buildLoginForm() {
                 fillColor: Colors.white10,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
-                  borderSide: BorderSide(color: Colors.greenAccent), // add a border color
+                  borderSide: BorderSide(
+                      color: Colors.pinkAccent), // add a border color
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
-                  borderSide: BorderSide(color: Colors.blue), // add a border color
+                  borderSide:
+                      BorderSide(color: Colors.blue), // add a border color
                 ),
               ),
             ),
           ),
         ],
       ),
-
       SizedBox(
         height: 10,
       ),
@@ -72,21 +76,79 @@ Padding buildLoginForm() {
   );
 }
 
-Expanded buildLoginAppleGoogle() {
+Padding buildLRegisterForm(BuildContext context) {
+  return Padding(
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      child: Column(
+        children: [
+          buildTextBox(Icons.person, 'Name Surname'),
+          buildTextBox(Icons.mail_outline, 'Mail'),
+          buildTextBox(Icons.cake_outlined, 'Date Of Birth Day'),
+          buildTextBox(Icons.password, 'Password'),
+        ],
+      ));
+}
+
+Padding buildTextBox(IconData icon, String text) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 10.0),
+    child: Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(icon),
+              hintText: text,
+              filled: true,
+              fillColor: Colors.white10,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide:
+                    BorderSide(color: Colors.pinkAccent), // add a border color
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: BorderSide(color: Colors.blue), // add a border color
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Expanded buildLoginAppleGoogle(BuildContext context, bool isRegister) {
   return Expanded(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-
         Row(
           children: [
-            SizedBox(width: 20,),
-            Expanded(child: Divider(height: 12,)),
-            SizedBox(width: 20,),
-            Text('Or',style: TextStyle(fontSize: 18),),
-            SizedBox(width: 20,),
-            Expanded(child: Divider(height: 12,)),
-            SizedBox(width: 20,),
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+                child: Divider(
+              height: 12,
+            )),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              'Or',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+                child: Divider(
+              height: 12,
+            )),
+            SizedBox(
+              width: 20,
+            ),
           ],
         ),
         Row(
@@ -129,14 +191,30 @@ Expanded buildLoginAppleGoogle() {
             ),
           ],
         ),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Dont Have An Account?'),
-            Text(' Register Now',style: TextStyle(color: Colors.blue),
-          )],
-        ),
+        isRegister
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Dont Have An Account?'),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPageView(),));
+                    },
+                    child: Text(
+                      ' Register Now',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  )
+                ],
+              )
+            : GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child:Text(
+                  ' < Go Back',
+                  style: TextStyle(color: Colors.blue,fontSize: 18),
+                )),
       ],
     ),
   );
